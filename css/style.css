@@ -26,6 +26,7 @@
 body {
   color: var(--Very-Dark-Violet);
   font-family: 'Poppins', sans-serif;
+  width: 100wh;
 }
 .wrapper {
   width: 90%;
@@ -37,9 +38,9 @@ a {
   text-decoration: none;
 }
 
-/* * {
+* {
   border: 1px solid red;
-} */
+}
 
 /* header styles  */
 header {
