@@ -13,6 +13,7 @@
   --Very-Dark-Blue: hsl(255, 11%, 22%);
   --Very-Dark-Violet: hsl(260, 8%, 14%);
   font-size: 18px;
+  width: 100wh;
 }
 
 *::after,
@@ -26,12 +27,10 @@
 body {
   color: var(--Very-Dark-Violet);
   font-family: 'Poppins', sans-serif;
-  width: 100wh;
 }
 .wrapper {
-  width: 90%;
+  width: 88%;
   margin: auto;
-  min-width: 375px;
   max-width: 1340px;
 }
 a {
@@ -179,7 +178,6 @@ nav a {
 }
 .hero-section-image {
   width: 100%;
-  /* height: 360px; */
   order: -1;
 }
 .hero-section-image img {
