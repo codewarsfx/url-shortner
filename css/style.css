@@ -80,7 +80,7 @@ nav {
 }
 nav a {
   color: white;
-  font-size: 1.1rem;
+  font-size: 0.8rem;
   font-weight: 500;
   transition: color 0.2s ease;
 }
@@ -216,7 +216,7 @@ nav a:hover {
   transform: translateX(-50%);
   padding: 1em;
   width: 100%;
-  background-color: var(--Dark-Violet);
+  background: url(../images/bg-boost-mobile.svg) var(--Dark-Violet);
 }
 .form-group {
   display: flex;
@@ -269,6 +269,8 @@ nav a:hover {
     top: 90%;
     padding: 2em;
     width: 70%;
+    background: url(../images/bg-shorten-desktop.svg) var(--Dark-Violet);
+    background-size: cover;
   }
   .form-group {
     flex-direction: row;
@@ -306,6 +308,7 @@ nav a:hover {
   margin-top: 1em;
 }
 .form-result-list li a {
+  font-size: 14px;
   color: var(--Dark-Violet);
 }
 .list-link-short {
@@ -313,6 +316,8 @@ nav a:hover {
 }
 .list-link-short a {
   color: var(--Cyan) !important;
+  font-size: 14px;
+  text-decoration: underline;
 }
 .list-link-short button {
   padding: 0.6em 2.5em;
@@ -329,6 +334,7 @@ nav a:hover {
 @media (max-width: 960px) {
   .hero-form-result {
     width: 100%;
+    position: relative;
   }
   .form-result-list li {
     flex-direction: column;
@@ -338,6 +344,7 @@ nav a:hover {
     padding: 1em;
     display: block;
     margin: 0;
+    font-size: 11px;
   }
   .list-link-short {
     margin: 0;
@@ -445,7 +452,10 @@ nav a:hover {
 /* pre nav section */
 
 .pre-nav {
-  background-color: var(--Dark-Violet);
+  background: url(../images/bg-boost-desktop.svg) var(--Dark-Violet);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
   color: white;
   padding: 3em;
 }
@@ -467,6 +477,10 @@ nav a:hover {
 @media (max-width: 760px) {
   .pre-nav {
     font-size: 0.8em;
+    background: url(../images/bg-boost-mobile.svg) var(--Dark-Violet);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
   }
   .nav-heading {
     font-size: 1.5em;
@@ -545,6 +559,21 @@ a {
 }
 /* -----------------------------------------------end of footer section------------------------------------------- */
 
-/* * {
-  border: 1px solid red;
-} */
+/* loader */
+
+.loader {
+  position: absolute;
+  left: 50%;
+  bottom: -9%;
+  color: var(--Dark-Violet);
+  animation: rotate 1.6s ease-in infinite;
+  visibility: hidden;
+}
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

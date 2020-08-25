@@ -9,6 +9,8 @@ const UIController = (() => {
     formButton: document.querySelector('.form-group-button'),
     searchResult: document.querySelector('.hero-form-result'),
     listElement: document.querySelector('.form-result-list'),
+    copyButton: document.querySelector('.copy-buttton'),
+    loader: document.querySelector('.loader'),
   };
   // utility function for reading input value
   const readValue = (element) => element.value;
@@ -23,10 +25,23 @@ const UIController = (() => {
     element.innerHTML = '';
   };
 
+  //utility function for copying to clipboard
+  const copyClipboard = (element) => {
+    window.navigator.clipboard.writeText(element.innerText);
+  };
   return {
+    //dom elements
     domElements,
+    //public method for reading the value of the input field
     readValue,
+    //public method for clearing input field
     clearInputField,
+    //public method for copying to clipboard
+    copyToClipboard: (ele) => {
+      //copy text
+      copyClipboard(ele);
+    },
+    //public method for displaying result
     displayResult: ({ shortlink, longLink }) => {
       const uiSnippet = `
         <li>
@@ -34,12 +49,19 @@ const UIController = (() => {
             <a href="${longLink}" target="_blank">${longLink}</a>
           </span>
           <span class="list-link-short">
-            <a href="https://${shortlink}" target="_blank">${shortlink}</a>
-            <button>Copy</button>
+            <a href="https://${shortlink}" class="hello" target="_blank">${shortlink}</a><button class='copy-buttton'>Copy</button>
           </span>
         </li>
       `;
       domElements.listElement.insertAdjacentHTML('beforeend', uiSnippet);
+    },
+    //public method for displaying loader
+    displayLoader: () => {
+      domElements.loader.style.visibility = 'visible';
+    },
+    //public method for hidding loader
+    hideLoader: () => {
+      domElements.loader.style.visibility = 'hidden';
     },
   };
 })();
@@ -97,12 +119,30 @@ const appContorller = ((ui, data) => {
     let inputValue = ui.readValue(ui.domElements.inputElement);
     //clear input field
     ui.clearInputField(ui.domElements.inputElement);
-    // create new link
-    const link = data.createNewLink(inputValue);
-    //api request
-    await link.getShortenedLinks();
-    //display result in ui
-    ui.displayResult(link.result);
+    if (inputValue) {
+      // create new link
+      const link = data.createNewLink(inputValue);
+      //display loader
+      ui.displayLoader();
+      try {
+        //api request
+        await link.getShortenedLinks();
+        setTimeout(() => {
+          //remove loader
+          ui.hideLoader();
+          //display result in ui
+          ui.displayResult(link.result);
+        }, 2000);
+      } catch (error) {
+        alert('an error occured please check that you entered a correct url');
+      }
+    }
+  });
+  ui.domElements.listElement.addEventListener('click', function (e) {
+    if (e.target.matches('.copy-buttton,.copy-buttton *')) {
+      ui.copyToClipboard(e.target.previousSibling);
+      e.target.innerText = 'Copied!';
+    }
   });
 })(UIController, dataContoller);
 
