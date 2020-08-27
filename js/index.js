@@ -77,29 +77,36 @@ const dataContoller = (() => {
     }
     //setup method to make async request to the api
     async getShortenedLinks() {
-      const key = 'a869fe0d92824384aa94bed2dfd5c203'; // api key for rebrandly api
-      let linkRequest = {
-        destination: this.link,
-        domain: { fullName: 'rebrand.ly' },
-      };
+      try {
+        const key = 'a869fe0d92824384aa94bed2dfd5c203'; // api key for rebrandly api
+        let linkRequest = {
+          destination: this.link,
+          domain: { fullName: 'rebrand.ly' },
+        };
 
-      let requestHeaders = {
-        'Content-Type': 'application/json',
-        apikey: key,
-      };
-      await $.ajax({
-        url: 'https://api.rebrandly.com/v1/links',
-        type: 'post',
-        data: JSON.stringify(linkRequest),
-        headers: requestHeaders,
-        dataType: 'json',
-        success: (link) => {
-          this.result = {
-            shortlink: link.shortUrl,
-            longLink: link.destination,
-          };
-        },
-      });
+        let requestHeaders = {
+          'Content-Type': 'application/json',
+          apikey: key,
+        };
+
+        await $.ajax({
+          url: 'https://api.rebrandly.com/v1/links',
+          type: 'post',
+          data: JSON.stringify(linkRequest),
+          headers: requestHeaders,
+          dataType: 'json',
+          success: (link) => {
+            this.result = {
+              shortlink: link.shortUrl,
+              longLink: link.destination,
+            };
+          },
+        });
+      } catch (error) {
+        alert(
+          'an error occurred ..please check that you entered the correct information. thank you'
+        );
+      }
     }
   }
 
