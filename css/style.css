@@ -228,6 +228,13 @@ nav a:hover {
   border: none;
   border-radius: 5px;
 }
+.form-group-input:invalid {
+  border: 3px solid red;
+}
+.form-group-input:focus {
+  border: solid var(--Cyan) 4px;
+  outline: none;
+}
 .form-group-button {
   margin-top: 1em;
   background-color: var(--Cyan);
